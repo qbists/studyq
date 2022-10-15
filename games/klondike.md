@@ -375,11 +375,7 @@ That gives us a list of triples: from-column, from-index, and to-column. We pass
 cards:c ./:m[;0 1];
 ```
 
-??? tip "A list is a function of its indexes."
-
-    The use here of Apply with an iterator again highlights a founding insight of q: _a list is a function of its indexes_. That has deep implications.
-
-    Here we note only that Apply applies a function to its arguments or a list to its indexes – the syntax is the same.
+**Tip** A list is a function of its indexes. The use here of Apply with an iterator again highlights a founding insight of q: _a list is a function of its indexes_. That has deep implications. Here we note only that Apply applies a function to its arguments or a list to its indexes – the syntax is the same.
 
 `m[;0 1]` is a list of pairs. The first pair here is `1 2`. The first result item from ` ./:m[;0 1]` is thus `c . 1 2`, equivalent to `c[1;2]`, which is to say the third card from the second column.
 

@@ -3,7 +3,7 @@
 Ingestion here is a treat. Comparing the file lines to `"1"` gets us a boolean matrix.
 
 ```q
-q)show dg:"1"=read0`:03input.txt / diagnostic
+q)show dg:"1"=read0`$":input/03.txt" / diagnostic
 110011110101b
 110011100010b
 010100011010b
@@ -51,7 +51,7 @@ All that remains is to encode these two binary numbers as decimals and get their
 The complete solution:
 
 ```q
-q)prd 2 sv'(>=;<){.[x]1 .5*(sum;count)@\:y}\:"1"=read0`:03input.txt
+q)prd 2 sv'(>=;<){.[x]1 .5*(sum;count)@\:y}\:"1"=read0`$":input/03.txt"
 2967914
 ```
 
@@ -89,7 +89,7 @@ We stop just before we eliminate the last row/s.
 We can use the Scan iterator to watch the row indexes being filtered.
 
 ```q
-q)(til count dg) {$[count i:fltr[>=]y x;x i;x]}\ flip"1"=read0`:03test.txt
+q)(til count dg) {$[count i:fltr[>=]y x;x i;x]}\ flip"1"=read0`$":test/03.txt"
 1 2 3 4 7 8 9
 2 3 4 8
 2 3 4
@@ -104,7 +104,7 @@ Switching the comparison operator will give us the CO<sub>2</sub> scrubber ratin
 So to be tidy, let’s name the lambda and make the comparison operator its third argument.
 
 ```q
-q)dg:"1"=read0`:test3.txt
+q)dg:"1"=read0`$":test/03.txt"
 q)analyze:{$[count i:fltr[z]y x;x i;x]}
 q)(til count dg) analyze[;;>=]\ flip dg
 1 2 3 4 7 8 9
@@ -135,7 +135,7 @@ On to the puzzle data.
 q)fltr:{where y= .[x]1 .5*(sum;count)@\:y)}
 q)analyze:{$[count i:fltr[z]y x;x i;x]}
 q)rating:{first(til count y)analyze[;;x]\flip y}
-q)prd 2 sv'dg (>=;<)rating\: dg:"1"=read0`:03input.txt
+q)prd 2 sv'dg (>=;<)rating\: dg:"1"=read0`$":input/03.txt"
 7041258
 ```
 
@@ -144,7 +144,7 @@ q)prd 2 sv'dg (>=;<)rating\: dg:"1"=read0`:03input.txt
 Alternative solutions (adapted) from sujoy13 on [community.kx.com](https://community.kx.com/t5/Advent-of-Code-2021/AOC-Day-3-Binary-Diagnostic/td-p/11372):
 
 ```q
-L:read0`:03input.txt
+L:read0`$:"input/03.txt"
 prd 2 sv'"J"$string ("01";"10")@\:{(>).(sum')"10"=\:x} each flip L / part 1
 prd {2 sv'"I"$string{?[1~count x;x;x where x[;y]=z(>=).(sum')"10"=\:x[;y]]}[;;y]/ [x;til count first x]}[L;] each ("01";"10") /part 2
 ```

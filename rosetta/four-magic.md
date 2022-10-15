@@ -169,7 +169,7 @@ q)(count s@)\[12345678]
 12345678 74 12 6 3 5 4
 ```
 
-!!! tip "The composition `(count s@)` is equivalent to the lambda `{count s x}`"
+**Tip** The composition `(count s@)` is equivalent to the lambda `{count s x}`.
 
 Stringify the sequence and use Each Prior to format in pairs.
 

@@ -6,7 +6,7 @@ Every puzzle has the same first step: ingesting the data.
 We‘re proud of how easy it is to convert each day’s text file into a tractable q data structure.
 
 ```q
-q)show d:"J"$read0 `:01input.txt
+q)show d:"J"$read0 `$":input/01.txt"
 148 167 168 169 182 188 193 209 195 206 214 219 225 219 211 215 216 195 200 1..
 ```
 

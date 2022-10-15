@@ -19,7 +19,7 @@ Take the starting position and depth as 0 0.
 
 ```q
 q)forward:1 0*; down:0 1*; up:0 -1*
-q)show c:value each read0`:02test.txt
+q)show c:value each read0`$":test/02.txt"
 5 0
 0 5
 8 0
@@ -42,7 +42,7 @@ Part 2 complicates the picture. The first column of `c` still describes forward 
 A table can help us to think this through.
 
 ```q
-q)crs:{select cmd:x,fwd,ud from flip`fwd`ud!flip value each x}read0`:02test.txt
+q)crs:{select cmd:x,fwd,ud from flip`fwd`ud!flip value each x}read0`$":test/02.txt"
 q)update aim:sums ud from `crs
 `crs
 q)update down:fwd*aim from `crs
@@ -97,7 +97,7 @@ That reduces our complete solution to
 
 ```q
 forward:1 0*; down:0 1*; up:0 -1*
-c:value each read0`:02input.txt
+c:value each read0`$":input/02.txt"
 a[`$"2-1"]:prd sum c
 a[`$"2-2"]:prd sum {x*1,'sums y}. flip c
 ```

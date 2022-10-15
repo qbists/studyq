@@ -136,10 +136,7 @@ URL:"http://wiki.puzzlers.org/pub/wordlists/unixdict.txt"
 UD:upper system"curl -s ",URL  / Unix dictionary
 ```
 
-!!! warning "Q and U"
-
-    In English the letter Q is almost always followed by the letter U.
-    On the Boggle board the two letters appear as one – `Qu` – and are scored as two letters when counting word lengths.
+**Q and U** In English the letter Q is almost always followed by the letter U. On the Boggle board the two letters appear as one – `Qu` – and are scored as two letters when counting word lengths.
 
 ```q
 BOGGLEDICT:ssr[;"QU";"Q"]each UD where ce[UD]<17

@@ -112,7 +112,7 @@ The core of the solution is recursive.
 1.  If you cannot fill the first letter of the string `s[0]` from the available blocks, the result is `0b`.
 1.  Otherwise, find all the blocks that match `s[0]`. For each block, remove it from the available blocks, and call the function to see if you can make `1_s`. The result is whether any of these calls returns `1b`.
 
-!!! tip "A lambda can use `.z.s` to refer to itself"
+*Tip* A lambda can use `.z.s` to refer to itself.
 
 ```q
 BLOCKS:string`BO`XK`DQ`CP`NA`GT`RE`TG`QD`FS`JW`HU`VI`AN`OB`ER`FS`LY`PC`ZM
