@@ -6,10 +6,6 @@ Advent of Code 2021 [Day 8](https://adventofcode.com/2021/day/8)
 
 ---
 
-
-
-## Part 1
-
 Ingesting data with q always feels like replacing an axe with a chain saw.
 
 ```q
@@ -18,6 +14,8 @@ q)read0`$":test/08.txt"
 "edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc"
 "fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg"
 ```
+
+## Part 1
 
 Treat it like a CSV: split it into two lists of strings; trim and split each string into substrings;
 name each list, and flip for a table.
@@ -204,3 +202,4 @@ an:{ / analyze note
   10 sv css?`$asc each sw p?sw?x`signal }
 a[`$"8-2"]:sum an each notes
 ```
+

@@ -1,6 +1,12 @@
 # 4. Giant Squid
 
+> You're already almost 1.5km (almost a mile) below the surface of the ocean, already so deep that you can't see any sunlight. What you can see, however, is a giant squid that has attached itself to the outside of your submarine.
+> 
+> Maybe it wants to play bingo?
+
 Advent of Code 2021 [Day 4](https://adventofcode.com/2021/day/4)
+
+---
 
 The bingo boards are nicely readable in the text file, but we shall find them more tractable as vectors.
 

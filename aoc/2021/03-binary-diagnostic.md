@@ -1,4 +1,10 @@
-# Day 3: Binary diagnostic
+# Day 3: Binary Diagnostic
+
+> The submarine has been making some odd creaking noises, so you ask it to produce a diagnostic report just in case.
+
+Advent of Code 2021 [Day 3](https://adventofcode.com/2021/day/3)
+
+---
 
 Ingestion here is a treat. Comparing the file lines to `"1"` gets us a boolean matrix.
 

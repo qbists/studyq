@@ -1,6 +1,12 @@
 # Day 2: Dive!
 
-https://adventofcode.com/2021/day/2
+> Now, you need to figure out how to pilot this thing.
+>
+> It seems like the submarine can take a series of commands like forward 1, down 2, or up 3…
+
+Advent of Code 2021 [Day 2](https://adventofcode.com/2021/day/2)
+
+---
 
 Today‘s problem solution uses projections to ingest the data, then a table to think through a solution to the second part. Finally we reduce the table solution to a simpler vector expression.
 
@@ -12,6 +18,7 @@ The text file consists of course adjustments that affect horizontal position and
 	up 3
 	down 8
 	forward 2
+
 
 ## Part 1
 
