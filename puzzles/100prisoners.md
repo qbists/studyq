@@ -113,4 +113,4 @@ q)-1+ count step scan is p
 6
 ```
 
-My thanks to Vector Dōjō tutors Rian Ó Cuinnegáin and Cillian Murphy for their work on this.
+My thanks to Vector Dōjō tutors Rian Ó Cuinnegáin and Cillian Reilly for their work on this.
