@@ -2,7 +2,7 @@
 
 ## Problem
 
-Suppose we have a string of characters from the english alphabet:
+Suppose we have a string of characters from the English alphabet:
 
 ```q
 "aaaaaaaabbbbbbcccdeeeeeeefffbbaaab"
