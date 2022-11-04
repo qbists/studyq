@@ -13,4 +13,5 @@ sqr:{x*x}
 /
 .[-](sqr sum@;sum sqr@)@\: nnt 100
 .[-]('[sqr;sum];'[sum;sqr])@\: nnt 100
-.[-](('[;]over) each 1 reverse\({x*x};sum) )@\: 1+til 100
+.[-]('[;]./:1 reverse\(sqr;sum))@\:nnt 100
+k).[-]('[;]./:1|:\(sqr;sum))@\:nnt 100
