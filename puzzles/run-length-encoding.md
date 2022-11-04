@@ -1,4 +1,4 @@
-# Run Length Encoding
+# Run-length encoding
 
 ## Problem
 
@@ -87,7 +87,7 @@ q)sol3 s
 "a8b6c3de7f3b2a3b"
 ```
 
-## Performance Indication
+## Performance indication
 
 ```q
 q)t:1000000?("a";"b";"c")
