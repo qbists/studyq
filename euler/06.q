@@ -10,6 +10,11 @@ nnt:1+til@  / natural numbers to
 sqr:{x*x}
 {(sqr sum x)-sum sqr x} nnt 100
 
+/ Constant time solution
+nsum:{"j"$.5*x*x+1} / Sum of the first x positive integers
+n2sum:{div[x*(1+2*x)*x+1;6]} / Sum of the squares of the first x positive integers
+{(prd 2#nsum x)-n2sum x} 100 
+
 /
 .[-](sqr sum@;sum sqr@)@\: nnt 100
 .[-]('[sqr;sum];'[sum;sqr])@\: nnt 100
