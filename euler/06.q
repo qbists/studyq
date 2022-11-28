@@ -6,7 +6,8 @@
 / Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 
 / solutions
-nnt:1+til@  / natural numbers to
+/ nnt:1+til@  / natural numbers to
+nnt:1+til::  / natural numbers to
 sqr:{x*x}
 {(sqr sum x)-sum sqr x} nnt 100
 
@@ -15,3 +16,14 @@ sqr:{x*x}
 .[-]('[sqr;sum];'[sum;sqr])@\: nnt 100
 .[-]('[;]./:1 reverse\(sqr;sum))@\:nnt 100
 k).[-]('[;]./:1|:\(sqr;sum))@\:nnt 100
+
+/ Nick Psaris
+though less well-known, i prefer to build compositions with :: instead of @.
+@ adds an extra operator in the train of functions:
+q)1+til@
++[1]@[k){$[0>@x;!x;'`type]}]
+q)1+til::
++[1]k){$[0>@x;!x;'`type]}
+your solution introduces many new concepts. but as you indicate, it reduces readability.
+a shorter, faster and more readable solution would be:
+ssd:{(x*x:sum x)-sum x*x:1+til x} / sum square difference
