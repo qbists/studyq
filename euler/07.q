@@ -11,3 +11,6 @@ pi:{x%log x}                                                      / π(x) first 
 
 p:pt (10000>pi@)(2*)/1000                                         / first 10000 or so primes
 p@10000                                                           / 10001st prime
+
+/ Nth prime
+np:{[n] @[;n] pt (n>pi@)(2*)/1000 }
