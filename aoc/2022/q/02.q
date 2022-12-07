@@ -20,8 +20,8 @@ score play strategy
 score each 1 play\strategy
 
 
-/ András & Nick
 
+/ András Dőtsch & Nick Psaris
 i:flip ("CC";" ") 0: `:test/02.txt
 k:"ABC" cross "XYZ"
 / part 1
@@ -30,3 +30,9 @@ sum s i
 / part 2
 s:k!raze 0 3 6+/:2 rotate[1]\ 3 1 2
 sum s i
+
+
+/ Attila Vrabecz
+i:-88h+7h$("cc";" ")0:`:test/02.txt
+sum 1+i[1]+3*mod[;3]2-(-/)i
+sum(3 1 2 mod[;3]sum 3 2+i)+3*i 1
