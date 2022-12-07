@@ -12,6 +12,7 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 ## Sources
 
 * [k4 Topicbox](https://k4.topicbox.com/groups/k4)
+* #adventofcode at [kxsys.slack.com](https://kxsys.slack.com)
 * #vector-dojo at [iversoncollege.slack.com](https://iversoncollege.slack.com)
 * [community.kx.com](https://community.kx.com)
 
