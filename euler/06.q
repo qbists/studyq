@@ -11,13 +11,18 @@ nnt:1+til::  / natural numbers to
 sqr:{x*x}
 {(sqr sum x)-sum sqr x} nnt 100
 
+/ Constant time solution
+nsum:{"j"$.5*x*x+1} / Sum of the first x positive integers
+n2sum:{div[x*(1+2*x)*x+1;6]} / Sum of the squares of the first x positive integers
+{(prd 2#nsum x)-n2sum x} 100 
+
 /
 .[-](sqr sum@;sum sqr@)@\: nnt 100
 .[-]('[sqr;sum];'[sum;sqr])@\: nnt 100
 .[-]('[;]./:1 reverse\(sqr;sum))@\:nnt 100
 k).[-]('[;]./:1|:\(sqr;sum))@\:nnt 100
 
-/ Nick Psaris
+// Nick Psaris
 though less well-known, i prefer to build compositions with :: instead of @.
 @ adds an extra operator in the train of functions:
 q)1+til@
