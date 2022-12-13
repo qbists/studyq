@@ -37,3 +37,15 @@ groups: {_[;x]where count[x]#1 0 0} inp  / group in threes
 badge: first distinct ({x where x in y}/) ::  / identify badge
 sum priorities?badge each groups
 
+// Sujoy Rakshit
+d:(.Q.a!1+til 26),.Q.A!27+til 26
+f:{#[(0N;div[count x;2])] x}
+/Part 1
+sum ('[;]/[(d;first;(inter/);f)] each inp)
+/Part 2
+sum ('[;]/[(d;first;inter/)] each 0N 3#inp)
+
+// Ajay Rathore
+f:{sum 1+('[distinct;inter/]').Q.an?x}
+f 2 0N#/: inp
+f 3 cut inp

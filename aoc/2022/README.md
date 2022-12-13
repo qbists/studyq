@@ -21,19 +21,26 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 
 ## Contributors 
 
+* Muneish Adya
 * [Sean Ang](https://github.com/sean185)
+* Balaji
 * [George Berkeley](gberkeley4@gmail.com)
 * [András Dőtsch](https://github.com/adotsch)
 * [Tadgh Downey](mailto:tdowney@kx.com)
+* Tom Ferguson
 * [Péter Györök](https://github.com/gyorokpeter)
 * [Rory Kemp](mailto:rory.kemp04@gmail.com)
+* Phineas
 * [Nick Psaris](https://github.com/psaris)
 * [Roman Pszonka](mailto:rpszonka@kx.com)
 * [Sujoy Rakshit](https://github.com/SujoyRakshit)
+* Ajay Rathore
 * [Cillian Reilly](mailto:cillian.reilly2@gmail.com)
+* Ahmed Shabaz
 * [Nathan Swann](https://github.com/NathanSwann-AquaQ)
 * [Stephen Taylor](https://github.com/StephenTaylor-Kx)
 * [Zsolt Vencsel](mailto:zvenczel@kx.com)
+* Attila Vrabecz
 
 ---
 

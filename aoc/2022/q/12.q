@@ -104,3 +104,12 @@ min {bfs[x]} each starts / part 2
 /As usual will need to clean up and study yours for a more elegant solution. 
 /I need to read up some more on the scoping rules. 
 /Plus probably should have passed state between iterations rather than mutating globals. 
+
+// Phineas
+x:{(`r`c!/:(count x;count x 0)vs/:i),'([]v;w:26&1|("S",.Q.a)?v;j:i:til count v:raze x)} inp
+d:([]r:0 0 1 -1;c:1 -1 0 0)
+/p1
+c:flip`j`k!flip raze x[`j]{y,'y,r[`j]where -2<x[y;`w]-0W^(r:(2!x)(`r`c#x y)+/:z)`w}[x]\:d
+{select min c+d by j:k from ej[`j;x;y]}[t:update d:j<>k from c]/[([]j:1#?[x`v;"S"];c:0)]?[x`v;"E"]
+/p2
+{select min c+d by j:k from ej[`j;x;y]}[t]/[([]j:where 1=x`w;c:0)]?[x`v;"E"]

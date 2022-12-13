@@ -37,7 +37,7 @@ fn: {[t] first each cont {[t;c;m] @[@[c;enlist m[2];{[t;c;m;x] (t m[0] # c[m[1]]
 fn[reverse]
 fn[::]
 
-//Tadhg Downey
+// Tadhg Downey
 getInput:{[l]
   l:(0,where 0=count each l)_ l;
   state:trim flip reverse state[;where not 10=.Q.n?last state:l 0];
@@ -84,3 +84,36 @@ moven: {[n;from;to]
 Stacks: Start
 moven each Moves-\:0 1 1;
 first each Stacks
+
+// Attila Vrabecz
+s:(6#" I";" ")0:10_inp
+m:trim flip inp[til 8;-3+4*til 10]
+f:{[o;s;n;f;t] @/[s;(t;f);((o n#s f),;n _)]}
+first each f[reverse]/[m]. s
+first each f[]/[m]. s
+
+// Jason Fealy
+stacks:{reverse each trim flip -1_x[;where not null last x]}first i:"\n" vs'"\n\n" vs read1`:input/05.txt
+steps:0 -1 -1+(" J J J";" ")0: -1_last i
+f:{last@'{[p;s;c;f;t]@[;f;nc _]@[s;t;,;p(nc:neg c)#s f]}[x]/[stacks]. steps}
+f@'(reverse;::)
+
+// Ahmed Shabaz
+/crates
+c:enlist[""],trim@'(flip 8#inp) 1+4*til 9 
+/moves
+j:flip(flip"J"$" "vs/:10_inp)1 3 5
+/part 1
+1_first each {x[y 2]:(reverse (y 0)#x y 1),x y 2; x[y 1]:(y 0)_x y 1; x}/[c;j]
+/part 2
+1_first each {x[y 2]:(        (y 0)#x y 1),x y 2; x[y 1]:(y 0)_x y 1; x}/[c;j]
+
+// Sujoy Rakshit
+d:(enlist ""),(reverse')[l where {any .Q.A in x} each l:(trim')flip 8#inp]
+n:flip (" I I I";" ")0: 10_ inp
+f:{[x;a;b;c] @[@[x;c;,;a#reverse x b];b;neg[a]_]}
+f2:{[x;a;b;c] @[@[x;c;,;neg[a]#x b];b;neg[a]_]}
+/Part 1
+(last')f/[d;n[;0];n[;1];n[;2]]
+/Part 2
+(last')f2/[d;n[;0];n[;1];n[;2]]

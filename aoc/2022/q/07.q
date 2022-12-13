@@ -48,7 +48,7 @@ d7:{a:" "vs/:x;
 {t:d7 x;sum t where t<=100000} inp
 {t:d7 x;min t where 30000000<=t+70000000-t[""]} inp
 
-// Nick Psaris
+// Nick Psaris & Phineas
 t:([]p:(,\')(){$["cd"~y 1;$[".."~y 2;-1_x;x,`$y 2];x]}\x;s:"J"$(x:" "vs/:inp)[;0])
 sum (1+s bin 100000)#s:asc value exec sum s by p from ungroup t
 s s binr last[s]-40000000
@@ -108,3 +108,44 @@ s:"J"$first@'(" "vs/:inp)
 d:exec sum s by p from ungroup ([]p;s)
 sum d where d<=100000
 min d where d>=d[`:]-40000000
+
+// Ahmed Shahbaz
+/preprocess for absolute paths
+cd:"";
+j:(1#i),{$[x~"$ cd .."; cd::{(last x ss"/")#x}cd;
+           x like"$ cd *"; [xo:x; x:raze"$ cd ",cd,"/",-1#" "vs x; cd::raze cd,"/",-1#" "vs xo];
+           x like "dir *"; x:raze"dir ",cd,"/",-1#" "vs x];
+         x}'[1_inp]
+/calculate dir sizes
+dirs:{x where x like "*ls*"}"@$ cd" vs "@","@"sv j
+/note- fs = file system; d = dir; s = size
+fs:{([]d:key x; s:value x)}"J"$string`${(`$x 1)!x 0}@'{flip@'" "vs''"@"vs'x}{(`$x 0)!x 1}flip{"@$ ls@"vs x}@'dirs
+fs:{x:update sum'[s] from x where (all not null::)@'s;
+    xx:exec d!s from x where (all not null::)@'s;
+    update s:{key[y]#x^y}[xx;]@'s from x where (any null::)@'s}/[fs]
+/part 1
+exec sum s from fs where s<=100000
+/part 2
+capacity:70000000; required:30000000; used:first fs`s /first fs`s is root
+exec min s from fs where s>= required + used - capacity
+
+// Michael Turkington
+d:()!()
+path:()
+f:{x:" "vs x;$["cd"~x[1];
+  $[".."~x[2];path::-1_path;path::path,enlist x[2]];
+  "ls"~x[1];:();"dir"~x[0];:();
+  d[$[1=count path;path;{"/" sv (x;y)}\[path]]]+::"J"$x[0]]}
+f each inp
+/p1
+sum d where d<=100000
+
+// Phineas
+/p1
+t:update p:{$[y=`$"..";-1_x;x,y]} scan `$@'[;2]n from ([]n:" "vs/:inp) where inp like "$ cd*"
+t:select {$[count y;y;(),x]} scan p,s:"J"$n[;0],r:`$n[;1],n from t
+t:([]p:1 0#`;s:0N;r:`$"/"),select p,s,r from t where n[;0;0]<>"$"
+f:{x lj select s:(sum s;0N)any null s by p:-1_/:p, r:last each p from x}
+select sum s from t:f over (update d:null s from t) where d,s<100000
+/p2
+select min s from t where s>30000000-70000000-first s 

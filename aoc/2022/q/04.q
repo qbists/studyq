@@ -19,7 +19,10 @@ sum{any(all;any)@\:/:(within)./:(reverse\)x}each "J"$"-"vs/:/:","vs/: inp
 {sum{all[(in/)reverse x]|all (in/)x:("J"$"-"vs'x)[;0]+til each 1+abs value each x}each csv vs'x} inp
 {sum{any (in/)x:("J"$"-"vs'x)[;0]+til each 1+abs value each x}each csv vs'x} inp
 
-
+// Sujoy Rakshit
+l:{(::;rotate[1;])@\: flip ("II";"-")0: "," vs x} each inp
+sum {any (all')(within') . x} each l
+sum {any (any')(within') . x} each l
 
 // Stephen Taylor
 /part 1

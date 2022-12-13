@@ -40,3 +40,23 @@ t:"I"$inp
 sorted:desc sum each _[0,1+where t=0N;t] / split, sum each section, and sort
 sorted[0] / first element
 sum sorted[til 3] / sum of first 3 elements
+
+// Attila Vrabecz
+x:"J"$inp
+max(0|+)scan x
+sum 3#desc{x*0=next x}(0|+)scan x 
+
+// Mark Street
+max sum each (where null i) cut i:0N,"J"$inp
+
+// Muneish Adya
+//part 1
+(l:"J"$inp);max l:(+/')(0,(&)0N=l)_l
+//part 2
+sum 3#desc l
+
+// Cillian Reilly
+(max;sum 3#desc@)@\:deltas asc s*(~':)s:sums"J"$inp
+
+// Sean Ang
+max value {"(sum",x,")"} ssr[;"  ";";sum "] " " sv inp

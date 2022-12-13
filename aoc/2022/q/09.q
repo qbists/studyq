@@ -76,3 +76,35 @@ count distinct s[;2 3]
 ds: {.[;;:;]/[;2 cut x;"HT"] .[5 6#".";4 0;:;"s"]}      /display state
 \
 
+// Balaji
+/load directions
+steps: flip("CJ";" ")0: inp
+/rope head follows directions
+head:(enlist 0 0) {x, last[x]+/:(mv y 0)*/: 1+til y 1}/ steps
+/tail follows head
+f: {$[1<>max abs d:y - x;x+signum d;x]}\
+/part 1
+tail: f head
+count group tail
+/part 2 
+/ each knot tail becomes head of next knot
+lastknot:9 f/ head
+count group lastknot
+
+// Ahmed Shabaz
+t:flip`m`n!raze@'($[`;];$["J";])@'flip" "vs'inp
+d:`L`R`U`D!(-1 0; 1 0; 0 1; 0 -1)
+t:update sums H from ungroup update H:{y#enlist d[x]}'[m;n] from t
+f:{$[any 1<abs y-x; x+signum y-x;x]}\[0 0;]
+/part 1
+count distinct exec f H from t
+/part 2
+count distinct ?[`t;();();9(`f;)/`H]
+
+// András Dőtsch
+/revised by Nick Psaris
+i:where (!/) ("CJ";" ")0:inp
+s:sums ("UDLR"!(0 -1;0 1;-1 0;1 0)) i
+f:{$[2 in abs y-:x;x+1&-1|y;x]}
+count distinct 1 {0 0 f\ x}/ s
+count distinct 9 {0 0 f\ x}/ s

@@ -66,3 +66,14 @@ score: sum 1+ rounds? ::
 play:rounds!rounds[;0],'"XZYZYXYXZ"
 score each 1 play\strategy  /parts 1 & 2
 
+// Sujoy Rakshit
+d:("B Y";"A X";"C Z";"A Z";"C Y";"B X")!(3;3;3;0;0;0)
+d1:"XYZ"!(1;2;3)
+d2:("A Y";"B Y";"C Y";"A X";"B X";"C X";"A Z";"B Z";"C Z")!("A X";"B Y";"C Z";"A Z";"B X";"C Y";"A Y";"B Z";"C X")
+
+f:{sum (z x[;2]),6^y x}
+
+// Part 1
+f[inp;d;d1]
+// Part 2
+f[d2 inp;d;d1]

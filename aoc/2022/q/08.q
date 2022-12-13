@@ -59,9 +59,7 @@ p1:not(=':)maxs@
 p2:{reverse[x]&/:1+(sum mins 1_)each'y>x _\:/:y}
 2 sum/max map p1 each trees
 2 max/prd map p2[til count first trees;]each trees
-
-
-// part 1 variants
+/part 1 variants
 2 sum/first 4({(flip reverse@)each(x|not(=':)maxs y;y)}.)/((2#count inp)#0;inp)
 
 / Sean Ang
@@ -88,3 +86,4 @@ m:raze({reverse each x}\)each(flip\) i
 / m:raze({reverse each x}\)each(flip\)"J"$/:/: i
 2 sum/max(::;reverse each;flip;reverse flip@)@'@'[99 99#0;;:;1]each{where each differ each maxs each x}each m
 2 max/prd(::;reverse each;flip;reverse flip@)@'{(reverse til 99)&1+sum each mins each 1_/:x>-1_(_[1;]\)x}each'm
+
