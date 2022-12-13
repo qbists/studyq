@@ -1,9 +1,134 @@
 /https://adventofcode.com/2022/day/11
 
 // ingestion
-/ test: read0`:test/11.txt
-/ inp: read0`:input/11.txt
+test:  read0`:test/11.txt
+inp: read0`:input/11.txt
 
+//Péter Györök
+d11:{[d;r;x]
+    a:"\n"vs/:"\n\n"vs"\n"sv x;
+    it:"J"$4_/:" "vs/:a[;1]except\:",";
+    its:raze it;
+    itm:(0,-1_sums count each it)cut til count its;
+    op0:6_/:" "vs/:a[;2];
+    op:?[op0[;1]like"old";count[op0]#{x*x};
+        (("*+"!(*;+))op0[;0;0])@'"J"$op0[;1]];
+    dv:"J"$last each" "vs/:a[;3];
+    throw:reverse each"J"$last each/:" "vs/:/:a[;4 5];
+    pdv:prd dv;
+    st:(itm;its;count[it]#0);
+    step:{[throw;op;d;dv;pdv;st;i]
+        itm:st 0;its:st 1;tc:st 2;
+        ii:itm i;
+        tc[i]+:count ii;
+        w:((op[i]@'its ii)div d)mod pdv;
+        its[ii]:w;
+        itm:@[;;,;]/[itm;throw[i]0=w mod dv[i];ii];
+        itm[i]:"j"$();
+        (itm;its;tc)}[throw;op;d;dv;pdv];
+    round:step/[;til count itm];
+    mb:last round/[r;st];
+     prd 2#desc mb}
+d11[3;20] inp 
+d11[1;10000] inp 
+
+// András Dőtsch
+c:{`item`op`cond`if1`if0`cnt!get'[(
+    "(),",17_x 1;
+    "{[old]",18_x[2],"}"),
+    last@'" "vs/:x 3 4 5],
+    0
+ } each 7 cut inp
+f:{[c;x]
+    d:c x;
+    item:mw d[`op]d[`item];
+    c[x;`item]:0#0;
+    c[x;`cnt]+:count item;
+    c[d`if1;`item],:item where 0=item mod d`cond;
+    c[d`if0;`item],:item where 0<>item mod d`cond;
+    c
+ }
+mw:div[;3]
+prd 2#desc @[;`cnt] c f/ (20*8)#til 8
+mw:mod[;prd c`cond]
+prd 2#desc @[;`cnt] c f/ (10000*8)#til 8
+
+// Zsolt Venczel
+d:{(
+    "J"${", " vs x[1]} ": " vs x[1];
+    {parse "{[old] ",x[1],"}"} " = " vs x[2];
+    "J"$last " " vs x[3];"J"$last " " vs x[4];"J"$last " " vs x[5]
+    )} each 7 cut inp
+
+calc: {
+    mi::{x[0]} each d;
+    mr::(count d) # 0;
+    {{{[p;m1;m2;db;ni]
+        mr[p]:: mr[p] + 1;
+        np: $[(ni mod db)=0; m1; m2];
+        mi:: .[.[mi; enlist np; :; mi[np],ni]; enlist p; :; 1_mi[p]];
+        }[x; d[x] [3]; d[x] [4]; d[x] [2]]
+             each wlFn[d[x]] each mi[x]
+    } each til count d} each til roundN;
+    prd 2 # desc mr
+ }
+
+roundN: 20
+wlFn: {x[1][y] div 3}
+ans1: calc[]
+
+roundN: 10000
+mdc: prd {x 2} each d
+wlFn: {x[1][y] mod mdc}
+ans2: calc[]
+
+// Cillian Reilly
+/items
+items:(),/:value each 18_/:inp 1+7*til sum inp like"*Monkey*"
+operations:value each"{[old]",/:(19_/:inp 2+7*til sum r like"*Monkey*"),\:"}"
+divisors:value each last each" "vs/:inp 3+7*til sum inp like"*Monkey*"
+to:value each'last each'" "vs/:/:inp 4 5+/:7*til sum inp like"*Monkey*"
+/part 1
+f:{.[;0,y;:;`long$()]{.[x;0,y 0;,;y 1]}/[x;]{,'[;w]x[3]not 0=mod[;x 2]w:floor %[;3]x[1]x 0}x[;y]}
+prd 2#desc sum raze(8 cut 64#100000000b)*/:8 cut count each'first each -1_raze 20{{f\[x;til count first x]}last x}\enlist(items;operations;divisors;to)
+/part 2
+f:{@[;z 0;:;count[x]#enlist 7h$()]@/[y;;,';flip w]m:z[2]2 not/@[;z 0]w:mod[;x]z[1]y z 0}
+prd 2#desc sum{x*count[x]#(2#c)#1b,(c:count first x)#0b}
+  count[items]cut first each count each'
+  raze enlist[flip items mod/:divisors],-1_f[divisors]\[flip items mod/:divisors;]
+  raze 10000#enlist(til count items),'flip(operations;to)
+
+// George Berkeley 
+/Part 1:
+s:{5#1_ x} each 7 cut read0`:/tmp/aoc11.txt
+l:{(),value last ":" vs x 0} each s
+cnts:(count l)#0
+g:{{[fs;x] (x*c;x+c:x^"J"$fs 1)("*+")?fs 0} -2#" " vs x 1} each s
+m:{{[x;y;z;w]w,(z;y)0=mod[w:div[w;3];x]}.{"J"$last " " vs y x}[;x] each (2;3;4)} each s
+move:{o:first l x;l[x]:1_ l[x];u:m[x] g[x] o;l[u 1],:u 0;x}
+mmove:{cnts[x]+:count l x;{move x}/[count l x;x]}
+{mmove each x}/[20;til count l]
+prd 2#desc cnts
+/Part 2:
+s:{5#1_ x} each 7 cut read0`:/tmp/aoc11.txt
+l:{(),value last ":" vs x 0} each s
+cnts:(count l)#0
+N:prd {"J"$ last " " vs x 2} each s
+g:{{[fs;x] (x*c;x+c:x^"J"$fs 1)("*+")?fs 0} -2#" " vs x 1} each s
+m:{{[x;y;z;w]w,(z;y)0=mod[w:mod[w;N];x]}.{"J"$last " " vs y x}[;x] each (2;3;4)} each s
+move:{o:first l x;l[x]:1_ l[x];u:m[x] g[x] o;l[u 1],:u 0;x}
+mmove:{cnts[x]+:count l x;{move x}/[count l x;x]}
+{mmove each x}/[10000;til count l]
+prd 2#desc cnts
+
+// Rory Kemp
+m:{get each(raze 4_;,[;"}"]"{[old]",raze -3#;l;l;l:first reverse@)@'" "vs'1_"\n"vs x}each"\n\n"vs read1`:11.txt
+turn:{`W`o`n`t`f set'x y;c[y]+:count W;.[;y,0;:;0#0].[x;(key d;0);{x,y};value d:w group(f,t)@0=(w:q o W)mod n]}
+run:{c::m:'0;q::x;y{x turn/til count x}/m;prd 2#desc c}
+run[div[;3];20]        / part 1
+run[mod[;prd m@'2];20] / part 2
+
+//Stephen Taylor
 /part 1
 is: {  /initial state
   w: get each .[;(::;1)]":"vs'x[;1]; /item worry levels
@@ -15,8 +140,6 @@ is: {  /initial state
   n: count[w]#0; /# inspected
   ([]w;o;d;t;n) } {(where x like "Monkey *")_ x} ::
 
-test:  read0`:test/11.txt
-input: read0`:input/11.txt
 
 monkey: {[rlx;s;i]  /relaxation; state; monkey#
   m: s i;  /monkey dict
@@ -39,9 +162,6 @@ is: {  /initial state
   t: get each raze each -2#''x[;4 5]; /to monkeys
   n: count[w]#0; /# inspected
   ([]w;o;d;t;n) } {(where x like "Monkey *")_ x} ::
-
-test:  read0`:test/11.txt
-input: read0`:input/11.txt
 
 monkey: {[s;i]  /relaxation; state; monkey#
   m: s i;  /monkey dict

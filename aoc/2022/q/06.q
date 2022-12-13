@@ -1,16 +1,31 @@
 /https://adventofcode.com/2022/day/6
 
-/ingestion
-test:read0`:test/06.txt
 input:read0`:input/06.txt
 
+// András Dőtsch
+4 14{x+first where x=count@'distinct@'x#'(1_)\[y]}\:first inp
+
+// Péter Györök
+d6:{[c;x]{[c;x]c+first where c=count each distinct each
+    x neg[c-1]_til[c]+/:til count x}[c;first x]}
+d6[4] inp
+d6[14] inp
+
+//Zsolt Venczel
+fn: {[d; n] n + first where n = {[d;n;i] count distinct n # i _ d}[d;n] each til count d}
+fn[;4] first inp
+fn[;14] first inp
+
+// Cillian Reilly
+{y+?[;y]('[count;distinct])each flip(y-1)next\x}[first inp;]each 4 14
+
+// Stephen Taylor
 f: {x+?[;x](count distinct::)each y (til count[y]-1)+\:til x}
 g: {x+{x>count distinct y z+til x}[x;y;](1+)/0}
 
 /part 1 & 2
 4 14 f\:first input
 4 14 g\:first input
-
 
 /
 q)\ts:100 4 14 f\:first input
