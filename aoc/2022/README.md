@@ -29,6 +29,12 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 * [Rory Kemp](mailto:rory.kemp04@gmail.com)
 * [Nick Psaris](https://github.com/psaris)
 * [Roman Pszonka](mailto:rpszonka@kx.com)
+* [Sujoy Rakshit](https://github.com/SujoyRakshit)
 * [Cillian Reilly](mailto:cillian.reilly2@gmail.com)
+* [Nathan Swann](https://github.com/NathanSwann-AquaQ)
 * [Stephen Taylor](https://github.com/StephenTaylor-Kx)
 * [Zsolt Vencsel](msilto:zvenczel@kx.com)
+
+---
+
+[Advent of Code 2022](https://www.reddit.com/r/adventofcode/) on Reddit
