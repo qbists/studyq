@@ -15,12 +15,20 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 * #adventofcode at [kxsys.slack.com](https://kxsys.slack.com)
 * #vector-dojo at [iversoncollege.slack.com](https://iversoncollege.slack.com)
 * [community.kx.com](https://community.kx.com)
+* [github.com/CillianReilly/AOC/2022](https://github.com/CillianReilly/AOC/tree/master/2022)
+* [github.com/adotsch/AOC/2022](https://github.com/adotsch/AOC/tree/master/2022)
 
 
 ## Contributors 
 
 * [Sean Ang](https://github.com/sean185)
+* [George Berkeley](gberkeley4@gmail.com)
 * [András Dőtsch](https://github.com/adotsch)
+* [Tadgh Downey](mailto:tdowney@kx.com)
+* [Péter Györök](https://github.com/gyorokpeter)
+* [Rory Kemp](mailto:rory.kemp04@gmail.com)
 * [Nick Psaris](https://github.com/psaris)
-* [Cillian Reilly](https://github.com/cillianreilly)
+* [Roman Pszonka](mailto:rpszonka@kx.com)
+* [Cillian Reilly](mailto:cillian.reilly2@gmail.com)
 * [Stephen Taylor](https://github.com/StephenTaylor-Kx)
+* [Zsolt Vencsel](msilto:zvenczel@kx.com)
