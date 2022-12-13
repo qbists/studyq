@@ -1,5 +1,8 @@
+![Maintenance](https://img.shields.io/maintenance/yes/2022?style=for-the-badge)
+
 studyq
 ======
+
 *Tutorials, puzzles, exercises, essays and other study resources for the q programming language*
 
 Most users of q encounter it as a means of querying large kdb+ datasets. 

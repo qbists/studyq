@@ -1,3 +1,9 @@
+/ https://leetcode.com/problems/largest-perimeter-triangle/
+
+/ Given an integer array `nums`, return the largest perimeter of a triangle with a non-zero area, 
+/ formed from three of these lengths.
+/ If it is impossible to form any triangle of a non-zero area, return 0.
+
 ex1:2 1 2                 / LeetCode example 1: triangle
 ex2:1 2 1                 / LeetCode example 2: not
 ex3:8 1 9 5 4 6 6 1 8 5   / short test
