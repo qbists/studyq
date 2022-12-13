@@ -33,7 +33,7 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 * [Cillian Reilly](mailto:cillian.reilly2@gmail.com)
 * [Nathan Swann](https://github.com/NathanSwann-AquaQ)
 * [Stephen Taylor](https://github.com/StephenTaylor-Kx)
-* [Zsolt Vencsel](msilto:zvenczel@kx.com)
+* [Zsolt Vencsel](mailto:zvenczel@kx.com)
 
 ---
 
