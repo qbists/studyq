@@ -29,7 +29,7 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 * [Tadgh Downey](mailto:tdowney@kx.com)
 * Tom Ferguson
 * [Péter Györök](https://github.com/gyorokpeter)
-* [Rory Kemp](mailto:rory.kemp04@gmail.com)
+* [Rory Kemp](https://github.com/rak1507)
 * Phineas
 * [Nick Psaris](https://github.com/psaris)
 * [Roman Pszonka](mailto:rpszonka@kx.com)
