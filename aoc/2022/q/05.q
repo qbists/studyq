@@ -1,7 +1,25 @@
 /https://adventofcode.com/2022/day/5
 
 inp: read0`:input/05.txt
+test: read0`:test/05.txt
 
+`s`m set'{
+  (trim@'flip x[;1+4*til(1+count first x)div 4];  /stacks
+  flip 0 -1 -1+(" J J J";" ")0:y)                 /moves
+  }. -1 1_'{(0,where not count each x)_ x} test
+f: {[o;s;m] @/[s;m 1 2;(m[0]_;(o m[0]#s m 1),)]}
+first each s f[reverse]/m                         /part 1
+first each s f[::]/m                              /part 2
+
+animate: {1 "\033[H\033[J";                       /clear console
+  ht: 7h$first system"c";                         /console height
+  -1 raze each ({$[null x;3#" ";"[",x,"]"]}'')
+    reverse flip ht$reverse each x;
+  system "sleep 0.5";                             /pause
+  x }
+s (animate@f[reverse]::)/m;                       /animation
+
+/ 
 // András Dőtsch
 s:trim@'flip inp[til 8;1+4*til 9]
 m:{0 -1 -1 + get x where x in .Q.n," "} each 10_inp
@@ -9,9 +27,8 @@ f:{[o;s;x] @/[s;x 1 2;(x[0]_;o[x[0]#s x 1],)]}
 first each s f[reverse]/ m
 first each s f[::]/ m
 
-
 // Cillian Reilly
-i:flip -1 1 1*0 -1 -1+(6#" I";" ")0:(1+inp?"")_inp
+i:flip -1 1 1*0 -1 -1+(6#" I";" ")0:(1+inp?"")_test
 s:trim flip reverse((-1+inp?"")#inp)[;1+4*til 9]
 
 last each{@/[x;y 2 1;(,;:);](reverse y[0]#;y[0]_)@\:x y 1}/[s;i]
@@ -43,8 +60,8 @@ getInput:{[l]
   state:trim flip reverse state[;where not 10=.Q.n?last state:l 0];
   moves:"J"$string(`$" "vs'1_ l 1)[;1 3 5];
   (state;moves) } 
-{i:getInput x;last each iter/[i 0;i 1]} inp
-{i:getInput x;last each iter2/[i 0;i 1]} inp
+/ {i:getInput x;last each iter/[i 0;i 1]} inp
+/ {i:getInput x;last each iter2/[i 0;i 1]} inp
 
 // Helpers
 iter:{[acc;move] add[;move;] . sub[acc;move]}
@@ -94,9 +111,9 @@ first each f[]/[m]. s
 
 // Jason Fealy
 stacks:{reverse each trim flip -1_x[;where not null last x]}first i:"\n" vs'"\n\n" vs read1`:input/05.txt
-steps:0 -1 -1+(" J J J";" ")0: -1_last i
-f:{last@'{[p;s;c;f;t]@[;f;nc _]@[s;t;,;p(nc:neg c)#s f]}[x]/[stacks]. steps}
-f@'(reverse;::)
+/ steps:0 -1 -1+(" J J J";" ")0: -1_last i
+/ f:{last@'{[p;s;c;f;t]@[;f;nc _]@[s;t;,;p(nc:neg c)#s f]}[x]/[stacks]. steps}
+/ f@'(reverse;::)
 
 // Ahmed Shabaz
 /crates
@@ -110,7 +127,7 @@ j:flip(flip"J"$" "vs/:10_inp)1 3 5
 
 // Create a list of lists from the first 8 lines
 // Add a empty string to mimmic position
-d:(enlist ""),(reverse')[l where {any .Q.A in x} each l:(trim')flip 8#i:read0`aoc_5.txt];
+d:(enlist ""),(reverse')[l where {any .Q.A in x} each l:(trim')flip 8#i:inp];
 
 // move a from b to c
 n:flip (" I I I";" ")0: 10_ i;
