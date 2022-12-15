@@ -1,9 +1,10 @@
 /https://adventofcode.com/2022/day/4
 
 inp: read0`:input/04.txt  /assignments
+test: read0`:test/04.txt  /assignments
 
-// András Dőtsch
-i:("jj";"-")0:/:("**";",") inp
+// András Dőtsch	
+i:("jj";"-")0:/:("**";",")0: inp
 sum {0>=.[*]x-y} . i
 sum {0>=.[*]x-reverse y} . i
 
