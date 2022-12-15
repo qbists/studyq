@@ -4,6 +4,31 @@ inp: read0`:input/15.txt
 
 //// #adventofcode
 
+// Péter Györök
+d15p1:{[line;x]a:"J"$2_/:/:(" "vs/:x except\:",:")[;2 3 8 9];
+    range:sum each abs a[;0 1]-a[;2 3];
+    nr:range-abs line-a[;1];
+    xs:flip a[;0]+/:(neg nr;nr);
+    xs:asc xs where 0<=nr;
+    merged:{$[last[x][1]>=y[0];x[count[x]-1;1]|:y[1];x,:enlist y];x}/[1#xs;1_xs];
+    overlap:sum sum(distinct a[;2]where line=a[;3]) within/:merged;
+    sum[1+merged[;1]-merged[;0]]-overlap};
+d15p2:{[line;x]
+    lim:2*line;
+    a:"J"$2_/:/:(" "vs/:x except\:",:")[;2 3 8 9];
+    range:sum each abs a[;0 1]-a[;2 3];
+    cover:{[a;range;lim;line]
+        if[0=line mod 1000;show line];
+        nr:range-abs line-a[;1];
+        xs:flip a[;0]+/:(neg nr;nr);
+        xs[;0]|:0; xs[;1]&:lim;
+        xs:asc xs where 0<=nr;
+        {$[last[x][1]>=y[0]-1;x[count[x]-1;1]|:y[1];x,:enlist y];x}/[1#xs;1_xs]
+        }[a;range;lim]each til 1+lim;
+    c:where 2=count each cover;
+    cc:1+cover[c;0;1];
+    c+4000000*cc};
+
 // András Dőtsch
 //part 1
 i:j:get@'(.Q.n!.Q.n) inp
