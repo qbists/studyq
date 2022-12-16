@@ -8,7 +8,7 @@ For exploration and discussion of each solution, see the individual problem page
 
 ```q
 /read day's input
-day: {read0`$":input/",x,".txt"} 1_ string 100+ ::
+day: read0 `$ {":input/",x,".txt"} 1_ string 100+ ::
 ```
 
 
