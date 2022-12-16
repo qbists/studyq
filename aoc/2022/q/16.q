@@ -57,29 +57,3 @@ f2:{[x0;y0;x1;y1]
 .[f2] each j;
 sum 4000000 1 * (raze/) L1 inter L2 inter L3 inter L4
 
-//// Vector Dojo
-
-// Rory Kemp
-`sx`sy`bx`by set' flip {get @[x;where not x in "-0123456789";:;" "]}each inp;
-m:sum abs (sx-bx;sy-by) / manhattan dists
-{count except[;bx where by=x] distinct raze {$[y<0;();x-y-til 1+2*y]}'[sx;m-abs sy-x]} 2000000 / part 1
-peri:raze 1 1 -1 -1,''(sy-sx+m+1; sy-sx-m+1; sy+sx+m+1; sy+sx-m+1)
-int:distinct raze peri {r:0-1%(%/)x-y; (r; sum x*r,1)}\:/: peri
-sum 4000000 1*floor first int where {all raze(x=floor x;0<=x;x<=4000000;m<sum abs(sx;sy)-x)} each int
-
-//// https://github.com/CillianReilly/AOC
-
-// Cillian Murphy
-sb:2 cut/:flip "J"$-1_/:/:last each'"="vs/:/:("  **    **";" ")0:inp,\:"."
-md:{sum abs x-y}
-distances:md ./:sb
-sensors:first each sb
-beacons:last each sb
-range:{neg[x]+til 1+(-/)(neg\)x}
-
-// part 1
-(neg sum 2000000=last each distinct beacons)+/count distinct raze{$[not 0<d:(abs x-last y)-z;first[y]+range abs d;()]}'[2000000;sensors;distances]
-
-// part 2
-// works for test data but real input is too large
-// 20 vs ?[;1b]all{y<md[;x]each til[20]cross til 20}'[sensors;distances]
