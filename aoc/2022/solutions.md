@@ -61,4 +61,25 @@ first each s f[::]/m                              /part 2
 4 14 {x+first {x>count distinct y z}[x;y](1+)/til x}\: day 6
 ```
 
+## Day 7: No Space Left On Device
 
+```q
+p:(1#`:) {$[y~"$ cd /";1#x;y~"$ cd ..";-1_x;y like"$ cd *";x,.Q.dd[last x]`$last" "vs y;x]} \ inp: day 7
+s:"J"$first@'(" "vs/:inp)
+d:exec sum s by p from ungroup ([]p;s)
+sum d where d<=100000
+min d where d>=d[`:]-40000000
+```
+
+## Day 8: Treetop Tree House
+
+```q
+rot: flip reverse::                        /rotate 90° clockwise
+tor: reverse flip::                        /rotate 90° anticlockwise
+c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
+vw: (differ maxs::)'                       /visibility from West
+2 sum/max c4[vw] inp: day 8                /part 1
+vd0: {.[+](sum;0b in)@\:mins x[0]>1_x}     /viewing distance of x[0]
+vd: {,[;1 0i]vd0 each -3_(1_)\[x]}'        /eastward viewing distance 
+2 max/prd c4[vd] inp                       /part 2
+```
