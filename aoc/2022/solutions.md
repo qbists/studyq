@@ -38,7 +38,7 @@ sum each 1+.Q.an?(first@inter/)each'(2 0N#/:;0N 3#)@\:day 3
 ```q
 a: {asc each "J"$"-"vs/:/:","vs/:x} day 4
 d4p1: {sum(x[;1;1]<=x[;0;1]) or x[;0;0]=x[;1;0]}
-d4p2; {sum x[;1;0]<=x[;0;1]}
+d4p2: {sum x[;1;0]<=x[;0;1]}
 (d4p1;d4p2)@\:a
 ```
 
