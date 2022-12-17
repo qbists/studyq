@@ -1,7 +1,20 @@
 /https://adventofcode.com/2022/day/8
 
-inp: read0`:input/08.txt  /trees
+inp: read0`:test/08.txt  /trees
 
+// Stephen Taylor
+rot: flip reverse::                        /rotate 90° clockwise
+tor: reverse flip::                        /rotate 90° anticlockwise
+c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
+/part 1
+vw: (differ maxs::)'                       /visibility from West
+2 sum/max c4[vw] inp
+/part 2
+vd0: {.[+](sum;0b in)@\:mins x[0]>1_x}     /viewing distance of x[0]
+vd: {,[;1 0i]vd0 each -3_(1_)\[x]}'        /eastward viewing distance 
+2 max/prd c4[vd] inp
+
+\
 // Péter Györök
 {a:"J"$/:/:x;
   op:{x>maxs each -1_/:-1,/:x};
@@ -34,17 +47,6 @@ max max {{[y;x] (*/) (
     ds[vdata[x][y]] reverse y # vdata[x];
     ds[vdata[x][y]] (y+1) _ vdata[x]
     )}[x] each rng} each rng
-
-// Stephen Taylor
-rot: flip reverse::                        /rotate 90° clockwise
-tor: reverse flip::                        /rotate 90° anticlockwise
-c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
-/part 1
-2 sum/max c4[(differ maxs::)'] i
-/part 2
-app: {y,(1,count y 0)#x}                   /append row of xs
-v2: {app[0] (-1_x){count[y]&1+sum mins x>/:y}'(1_til count x)_\:x}  /view down x
-2 max/prd c4[v2] i
 
 // Tadhg Downey
 {(sum/)(|/)(flip reverse(>':)maxs reverse fi;reverse(>':)maxs reverse x;flip(>':)maxs fi:flip x;(>':)maxs x)} inp
