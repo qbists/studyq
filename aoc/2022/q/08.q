@@ -5,7 +5,7 @@ inp: read0`:test/08.txt  /trees
 // Stephen Taylor & Cillian Murphy
 rot: flip reverse::                        /rotate 90° clockwise
 tor: reverse flip::                        /rotate 90° anticlockwise
-c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
+c4: {til[4]{y tor/x z}[x]'3 rot\y}         /apply x to y from 4 directions
 vn: not(=':)maxs::                         /visibility from N
 2 sum/max c4[vn] inp                       /part 1
 vdw: {reverse[til count first x]&/:
