@@ -2,17 +2,15 @@
 
 inp: read0`:test/08.txt  /trees
 
-// Stephen Taylor
+// Stephen Taylor & Cillian Murphy
 rot: flip reverse::                        /rotate 90° clockwise
 tor: reverse flip::                        /rotate 90° anticlockwise
 c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
-/part 1
-vw: (differ maxs::)'                       /visibility from West
-2 sum/max c4[vw] inp
-/part 2
-vd0: {.[+](sum;0b in)@\:mins x[0]>1_x}     /viewing distance of x[0]
-vd: {,[;1 0i]vd0 each -3_(1_)\[x]}'        /eastward viewing distance 
-2 max/prd c4[vd] inp
+vn: not(=':)maxs::                         /visibility from N
+2 sum/max c4[vn] inp                       /part 1
+vdw: {reverse[til count first x]&/:
+  1+((sum mins 1_)'')x>-1_'(1_)\'[x]}      /viewing distance from W
+2 max/prd c4[vdw] inp                      /part 2
 
 \
 // Péter Györök
@@ -55,14 +53,16 @@ nxtGr: {[l] {[l;i] first w where (w:where[l>=l i])>i}[l]each til count l} / Next
 {(max/)prd(flip reverse each rvd each reverse each fi;reverse each rvd each reverse each x;flip rvd each fi:flip x;rvd each x)} inp
 
 // Cillian Reilly
-trees:3(flip reverse@)\inp
-map:((reverse flip@)/)'[til 4;]
-p1:not(=':)maxs@
-p2:{reverse[x]&/:1+(sum mins 1_)each'y>x _\:/:y}
+// Cillian Reilly
+trees: 3(flip reverse@)\inp
+map: ((reverse flip@)/)'[til 4;]
+ 
+p1: not(=':)maxs@
+p2: {reverse[x]&/:1+(sum mins 1_)each'y>x _\:/:y}
+ 
 2 sum/max map p1 each trees
 2 max/prd map p2[til count first trees;]each trees
-/part 1 variants
-2 sum/first 4({(flip reverse@)each(x|not(=':)maxs y;y)}.)/((2#count inp)#0;inp)
+
 
 / Sean Ang
 trees: i
@@ -82,10 +82,4 @@ sum raze (|/) search[trees]
 c:{(-1+count x)^first 1+where (1_x)>=first x}
 fn:{flip{c each z _' x}[x]\[();til count x]}
 max raze (*/) search[trees]
-
-/ Cillian Reilly
-m:raze({reverse each x}\)each(flip\) i
-/ m:raze({reverse each x}\)each(flip\)"J"$/:/: i
-2 sum/max(::;reverse each;flip;reverse flip@)@'@'[99 99#0;;:;1]each{where each differ each maxs each x}each m
-2 max/prd(::;reverse each;flip;reverse flip@)@'{(reverse til 99)&1+sum each mins each 1_/:x>-1_(_[1;]\)x}each'm
 

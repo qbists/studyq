@@ -77,9 +77,9 @@ min d where d>=d[`:]-40000000
 rot: flip reverse::                        /rotate 90° clockwise
 tor: reverse flip::                        /rotate 90° anticlockwise
 c4: {til[4]{[f;n;t]n tor/f@t}[x]'3 rot\y}  /apply ƒx to y from 4 directions
-vw: (differ maxs::)'                       /visibility from West
-2 sum/max c4[vw] inp: day 8                /part 1
-vd0: {.[+](sum;0b in)@\:mins x[0]>1_x}     /viewing distance of x[0]
-vd: {,[;1 0i]vd0 each -3_(1_)\[x]}'        /eastward viewing distance 
-2 max/prd c4[vd] inp                       /part 2
+vn: not(=':)maxs::                         /visibility from N
+2 sum/max c4[vn] inp: day 7                /part 1
+vdw: {reverse[til count first x]&/:
+  1+((sum mins 1_)'')x>-1_'(1_)\'[x]}      /viewing distance from W
+2 max/prd c4[vdw] inp                      /part 2
 ```
