@@ -147,3 +147,14 @@ f2:{[x;a;b;c] @[@[x;c;,;neg[a]#x b];b;neg[a]_]};
 
 // Part 2 traverse through the list, for each entry in n
 (last')f2/[d;n[;0];n[;1];n[;2]]
+
+// David Crossey
+/ part 1
+sep:first where inp like ""
+d:`stacktab`moves!(sep#;1_sep _)@\:inp
+stacks:rtrim each reverse each flip -1_d[`stacktab][;(count[ssr[first -1#d[`stacktab];" ";""]]-1) {4+x}\1];
+moves:"I"$(" " vs' d[`moves])[;1 3 5];
+raze -1#'{[w;x;y;z] w[z-1],:reverse neg[x]#w[y-1]; w[y-1]: neg[x] _ w[y-1];w}/[stacks] . flip moves
+
+/ part 2
+raze -1#'{[w;x;y;z] w[z-1],:neg[x]#w[y-1]; w[y-1]: neg[x] _ w[y-1];w}/[stacks] . flip moves
