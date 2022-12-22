@@ -8,8 +8,7 @@ move:{$[1<max abs d:y-x;x+signum d;x]}\[0 0;]
 
 / count distinct move s
 / count distinct 9 move/s
-/both parts
-(count distinct@)each(9 move\s)1 9
+(count distinct@)each(9 move\s)1 9  /both parts
 
 \
 // András Dőtsch revised by Nick Psaris
