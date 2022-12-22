@@ -83,3 +83,11 @@ vdw: {reverse[til count first x]&/:
   1+((sum mins 1_)'')x>-1_'(1_)\'[x]}      /viewing distance from W
 2 max/prd c4[vdw] inp                      /part 2
 ```
+
+## Day 9: Rope Bridge
+
+```q
+s: sums("RLDU"!(1 0;-1 0;0 -1;0 1))where .[!] ("CJ";" ")0:day 9
+move: {$[1<max abs d:y-x;x+signum d;x]}\[0 0;]
+(count distinct@)each(9 move\s)1 9  /both parts
+```

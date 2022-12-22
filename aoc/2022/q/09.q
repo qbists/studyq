@@ -1,6 +1,23 @@
 /https://adventofcode.com/2022/day/9
 
-inp: read0`:input/09.txt
+inp: read0`:test/09.txt
+
+// Cillian Reilly and Nick Psaris
+s:sums("RLDU"!(1 0;-1 0;0 -1;0 1))where (!/) ("CJ";" ")0:inp
+move:{$[1<max abs d:y-x;x+signum d;x]}\[0 0;]
+
+/ count distinct move s
+/ count distinct 9 move/s
+/both parts
+(count distinct@)each(9 move\s)1 9
+
+\
+// András Dőtsch revised by Nick Psaris
+i:where (!/) ("CJ";" ")0:inp
+s:sums ("UDLR"!(0 -1;0 1;-1 0;1 0)) i
+f:{$[2 in abs y-:x;x+1&-1|y;x]}
+count distinct 1 {0 0 f\ x}/ s
+count distinct 9 {0 0 f\ x}/ s
 
 // András Dőtsch
 p:(1#`:) {$[y~"$ cd /";1#x;y~"$ cd ..";-1_x;y like"$ cd *";x,.Q.dd[last x]`$5_y;x]} \ inp
@@ -41,14 +58,6 @@ p: {(::)} each til nodes
 ans1: cntPath[path]
 ans2: cntPath[p[nodes-1]]
 
-// Cillian Reilly
-s:sums(`R`L`D`U!(1 0;-1 0;0 -1;0 1))raze(#'). reverse("SJ";" ")0:inp
-move:{$[1<max abs d:y-x;x+signum d;x]}\[0 0;]
-
-count distinct move s
-count distinct 9 move/s
-/both parts
-(count distinct@)each(9 move\s)1 8
 
 // George Berkeley
 s:{" " vs x} each inp
@@ -74,7 +83,6 @@ s: is move/inp  /states
 count distinct s[;2 3] 
 
 ds: {.[;;:;]/[;2 cut x;"HT"] .[5 6#".";4 0;:;"s"]}      /display state
-\
 
 // Balaji
 /load directions
