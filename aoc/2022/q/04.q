@@ -32,3 +32,5 @@ sum ({$[any b:x=y;1b;x[1]<y 1]}.) each ass
 /part 2
 sum ({x[0]<=y 1}.) each ass
 
+// David Crossey
+count each where each max each' (all';any') each\: (within/) each' 2 cut' (,').(::;reverse each)@\:asc each "I"$"-" vs'' "," vs' inp

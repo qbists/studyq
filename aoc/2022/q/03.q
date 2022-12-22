@@ -49,3 +49,7 @@ sum ('[;]/[(d;first;inter/)] each 0N 3#inp)
 f:{sum 1+('[distinct;inter/]').Q.an?x}
 f 2 0N#/: inp
 f 3 cut inp
+
+// David Crossey
+score:(string .Q.a,.Q.A)!(1+til 52)
+(sum score distinct each (inter/)@/:) each (ceiling[count'[inp]%2] cut' inp;3 cut inp)
