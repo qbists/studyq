@@ -91,3 +91,12 @@ s: sums("RLDU"!(1 0;-1 0;0 -1;0 1))where .[!] ("CJ";" ")0:day 9
 move: {$[1<max abs d:y-x;x+signum d;x]}\[0 0;]
 (count distinct@)each(9 move\s)1 9  /both parts
 ```
+
+## Day 10: Cathode-Ray Tube
+
+```q
+i: 1+\get ssr/[;("addx";"noop");"0"]" "sv day 10  /X-register values
+sum i[c-2]*c: 20+40*til 6                         /part 1
+show ".#" 40 cut 2> abs (-1_1,i)- 240#til 40      /part 2
+```
+
