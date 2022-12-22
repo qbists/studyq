@@ -2,7 +2,7 @@
 
 inp: read0`:test/08.txt  /trees
 
-// Stephen Taylor & Cillian Murphy
+// Stephen Taylor & Cillian Reilly
 rot: flip reverse::                        /rotate 90° clockwise
 tor: reverse flip::                        /rotate 90° anticlockwise
 c4: {til[4]{y tor/x z}[x]'3 rot\y}         /apply x to y from 4 directions
