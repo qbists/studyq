@@ -25,6 +25,7 @@ https://adventofcode.com/2022/leaderboard/private/view/1526329
 * [Sean Ang](https://github.com/sean185)
 * Balaji
 * [George Berkeley](gberkeley4@gmail.com)
+* [David Crossey](https://github.com/davidcrossey)
 * [András Dőtsch](https://github.com/adotsch)
 * [Tadgh Downey](mailto:tdowney@kx.com)
 * Tom Ferguson
