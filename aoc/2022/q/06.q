@@ -61,3 +61,5 @@ q)\ts:100 F[14]x
 220 1008
 \
 
+// David Crossey
+raze {x+flip[count each' distinct each' x#''{1_'x}\[inp]]?'x} each 4 14

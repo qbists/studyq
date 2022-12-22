@@ -60,3 +60,6 @@ sum 3#desc l
 
 // Sean Ang
 max value {"(sum",x,")"} ssr[;"  ";";sum "] " " sv inp
+
+// David Crossey
+(first;sum 3#desc@)@\:sum each where[null 0N,r] _ r:"J"$read0 inp
