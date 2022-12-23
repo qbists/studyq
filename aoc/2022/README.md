@@ -108,7 +108,7 @@ sum i[c-2]*c: 20+40*til 6                         /part 1
 show ".#" 40 cut 2> abs (-1_1,i)- 240#til 40      /part 2
 ```
 
-## Day 11: Monkey in the Middle
+### Day 11: Monkey in the Middle
 
 ```q
 / initial state: input + item count
