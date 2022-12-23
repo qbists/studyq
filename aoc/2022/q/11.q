@@ -1,9 +1,26 @@
 /https://adventofcode.com/2022/day/11
 
 // ingestion
-test:  read0`:test/11.txt
-inp: read0`:input/11.txt
+inp: read0`:test/11.txt
 
+// Rory Kemp & Stephen Taylor
+/initial state with count
+is: update c:0 from flip `W`o`n`t`f!flip
+  {get each(raze 4_;raze("{[old]";;;;"}").-3#;last;last;last)@'" "vs'1_6#x}
+  each (0,1+where not count each inp)_inp
+
+turn: {[f;s;i]
+  t: s i;                                    /turn dict
+  w: f .[@]t`o`W;                            /worry levels
+  d: w group t `f`t not w mod t`n;           /distribution
+  .[;(i;`W);0#] .[;(key d;`W);{x,y};value d] .[;(i;`c);+;count w] s }
+
+round: {[f;s] s turn[f]/til count s}
+prd 2#desc@[;`c]20 round[div[;3]]/is         /part 1
+prd 2#desc@[;`c]20 round[mod[;prd is`n]]/is  /part 2
+
+
+/
 //Péter Györök
 d11:{[d;r;x]
     a:"\n"vs/:"\n\n"vs"\n"sv x;
