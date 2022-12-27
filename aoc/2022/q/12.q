@@ -1,7 +1,21 @@
 /https://adventofcode.com/2022/day/12
 
-inp: read0`:input/12.txt
+inp: read0`:test/12.txt
 
+Shp: count each 1 first\inp                                         /map shape
+`Start`End set'Shp vs/:raze[inp]?"SE";                              /start & end coords
+Map: ./[;(Start;End);:;0 25] -97+6h$inp                             /height map
+Is: 2 1 2#End                                                       /visited; last visited
+adj: (0 1;1 0;0 -1;-1 0)+\:                                         /adjacency
+filter: {y where not[null h] and (-2+Map . x)< h: Map ./:y}
+step: {(x,;::)@\:except[;x]distinct raze{filter[x] adj x}each y}.  
+
+-1+count(not Start in last@) step\ Is                               /part 1
+a: Shp vs/:where raze inp="a"                                       /"a" coords
+-1+count(not any a in last@) step\ Is                               /part 2
+
+
+/
 // Péter Györök
 d12:{[part;x]
     a:-97+`int$ssr/[;"SE";"az"]each x;
@@ -60,7 +74,7 @@ My Dijkstra is {x&min@'W+x N}/, I wouldn't call that complex, but I can use what
 Of course I know BFS does the job, but I've chosen Dijkstra, because it's more general and if the 2nd part changes the weighs, it's much easier to modify my code.
 Peter Gyorok
 I was also thinking that part 2 might change the weights (e.g. you figure out that you can actually climb higher than 1 but it takes some time, and the goal is now to optimize for time). But I decided I would just refactor/rewrite if that happens.
-\
+
 
 // Cillian Reilly
 /I needed to do my homework on path-finding algorithms, but I'm quite happy how this turned out.

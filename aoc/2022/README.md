@@ -127,6 +127,22 @@ prd 2#desc@[;`c]20 round[div[;3]]/is         /part 1
 prd 2#desc@[;`c]20 round[mod[;prd is`n]]/is  /part 2
 ```
 
+### Day 12: Hill Climbing Algorithm
+
+```q
+Shp: count each 1 first\inp                                         /map shape
+`Start`End set'Shp vs/:raze[inp]?"SE";                              /start & end coords
+Map: ./[;(Start;End);:;0 25] -97+6h$inp                             /height map
+Is: 2 1 2#End                                                       /visited; last visited
+adj: (0 1;1 0;0 -1;-1 0)+\:                                         /adjacency
+filter: {y where not[null h] and (-2+Map . x)< h: Map ./:y}
+step: {(x,;::)@\:except[;x]distinct raze{filter[x] adj x}each y}.  
+
+-1+count(not Start in last@) step\ Is                               /part 1
+a: Shp vs/:where raze inp="a"                                       /"a" coords
+-1+count(not any a in last@) step\ Is                               /part 2
+```
+
 ---
 
 ## Q leaderboard
