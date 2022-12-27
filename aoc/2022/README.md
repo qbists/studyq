@@ -130,7 +130,7 @@ prd 2#desc@[;`c]20 round[mod[;prd is`n]]/is  /part 2
 ### Day 12: Hill Climbing Algorithm
 
 ```q
-Shp: count each 1 first\inp                                         /map shape
+Shp: count each 1 first\inp: day 12                                 /map shape
 `Start`End set'Shp vs/:raze[inp]?"SE";                              /start & end coords
 Map: ./[;(Start;End);:;0 25] -97+6h$inp                             /height map
 Is: 2 1 2#End                                                       /visited; last visited
