@@ -150,7 +150,7 @@ inp: day 13
 I: 2 cut .j.k each inp where count[inp]#110b
 b: {x@/:(y;z)}                                        /'both' combinator
 
-cmp:{
+cmp: {
   $[all b[type;x;y]<0;      `long$x-y;
     any 0=c:b[count;x;y];   .[-;c];
     r:cmp . b[first;x;y];   r;
@@ -159,8 +159,8 @@ cmp:{
 sum 1+where 1>cmp .' I                                /part 1
 
 qs: {$[2>count x; x;    
-  raze(.z.s;::;.z.s)@'x
-    (group signum x cmp\:first x)@-1 0 1 ]}
+      raze(.z.s;::;.z.s)@'x
+        (group signum x cmp\:first x)@-1 0 1 ] }
 
 `A`B set'b[.j.k;"[[2]]";"[[6]]"];
 J: qs(A;B),raze I
