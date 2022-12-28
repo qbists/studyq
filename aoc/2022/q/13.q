@@ -2,8 +2,29 @@
 
 inp: read0`:input/13.txt
 
+I: 2 cut .j.k each inp where count[inp]#110b
+
+b: {x@/:(y;z)}  / 'both' combinator
+
+cmp:{
+  $[all b[type;x;y]<0;      `long$x-y;
+    any b[count;x;y]=0;     .[-] b[count;x;y];
+    r:cmp . b[first;x;y];   r;
+                            cmp . b[1_(),;x;y] ] }
+
+sum 1+where 1>cmp .' I              /part 1
+
+qs: {$[2>count x; x;    
+  raze(.z.s;::;.z.s)@'x(group signum x cmp\:first x)@-1 0 1
+  ]}
+
+`A`B set'b[.j.k;"[[2]]";"[[6]]"];
+J: qs(A;B),raze I
+prd 1+b[where ~/:[;J]::; A; B]     /part 2
+
+
+\
 // András Dőtsch
-p:{$[count x;.j.k x;::]}
 I:2#'3 cut p@'inp
 cmp:{
     $[(0>type x)&0>type y;      `long$x-y;
