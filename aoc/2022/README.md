@@ -166,6 +166,28 @@ qs: {$[2>count x; x;
 J: qs(A;B),raze I
 prd 1+b[where ~/:[;J]::; A; B]                        /part 2
 ```
+
+### Day 14: Regolith Reservoir
+
+```q
+range: {$[.[=]x;first x;{x+til y-x-1}. asc x]}        / x => y inclusive
+between: .[,'] (range') flip ::
+line: {[map;pts] ./[map;between pts;:;] 1}            / draw rock line
+
+Map: { /air and rock
+  I: (reverse'')raze{1_(;)prior x}@'(get'') " -> "vs/:x;
+  ((2 0+0 1000|max raze I)#0)line/I } inp
+
+fall: {[map;xy] first p where not map ./:p: xy+/:(1 0;1 -1;1 1;0 0) }
+drop: {[map] .[map;p;:;] 2*count[map]>1+first p: fall[map]/[0 500] }
+
+sum raze 2=drop/[Map]                                 /part 1
+
+drop2: {[map] .[map;;:;2] fall[map]/[0 500] }
+sum raze 2={not x . 0 500} drop2/Map                  /part 2
+```
+
+
 ---
 
 ## Q leaderboard

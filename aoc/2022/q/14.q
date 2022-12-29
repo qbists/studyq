@@ -1,6 +1,37 @@
 /https://adventofcode.com/2022/day/14
 
-inp: read0`:input/14.txt
+inp: read0`:test/14.txt
+
+range: {$[.[=]x;first x;{x+til y-x-1}. asc x]}   / x => y inclusive
+between: .[,'] (range') flip ::
+line: {[map;pts] ./[map;between pts;:;] 1}       / draw rock line
+
+Map: { /air and rock
+  I: (reverse'')raze{1_(;)prior x}@'(get'') " -> "vs/:x;
+  ((2 0+0 1000|max raze I)#0)line/I } inp
+
+fall: {[map;xy] first p where not map ./:p: xy+/:(1 0;1 -1;1 1;0 0) }
+drop: {[map] .[map;p;:;] 2*count[map]>1+first p: fall[map]/[0 500] }
+
+sum raze 2=drop/[Map]                            /part 1
+
+drop2: {[map] .[map;;:;2] fall[map]/[0 500] }
+sum raze 2={not x . 0 500} drop2/Map             /part 2
+
+
+disp: {[map;xy]                                  /display map with sand at xy   
+  m: .[map;;:;3] xy;                             /  mark sand
+  r: (first;last)@\:where any m;                 /  range of rock and sand
+  lbl: (;xy 0;) . r;                             /  col labels
+  c: range r+ -1 1;                              /  display columns
+  s: string[til count m],'" ";                   /  side labels
+  s: {(m+1)$neg[m:max count each x]$x}s;         /    aligned
+  w: count s 0;                                  /  side width
+  h: (w+count c;3)#" ";                          /  header
+  h: flip@/[h;w+c?lbl;:;] string lbl;            /    with labels 
+  h, s,' ".#o+"m[;c] }[;0 500]
+
+\
 
 //// k4 Topicbox
 
@@ -48,7 +79,7 @@ inp: read0`:input/14.txt
     first drop[origin]/[(0;map)]}\: inp
 
 // András Dőtsch
-I:raze{1_(;)':[x]}@'get'' " -> "vs/:inp
+I:raze{1_(;)':[x]}@'(get'') " -> "vs/:inp
 fl:last max raze I
 M:(fl+3;1000)#"."
 {.[`M;reverse min[x]+til@'1+max[x]-min x;:;"#"]} each I;
