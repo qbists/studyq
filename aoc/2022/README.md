@@ -176,7 +176,7 @@ line: {[map;pts] ./[map;between pts;:;] 1}            / draw rock line
 
 Map: { /air and rock
   I: (reverse'')raze{1_(;)prior x}@'(get'') " -> "vs/:x;
-  ((2 0+0 1000|max raze I)#0)line/I } inp
+  ((2 0+0 1000|max raze I)#0)line/I } day 14
 
 fall: {[map;xy] first p where not map ./:p: xy+/:(1 0;1 -1;1 1;0 0) }
 drop: {[map] .[map;p;:;] 2*count[map]>1+first p: fall[map]/[0 500] }
