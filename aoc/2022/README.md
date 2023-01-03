@@ -187,6 +187,19 @@ drop2: {[map] .[map;;:;2] fall[map]/[0 500] }
 sum raze 2={not x . 0 500} drop2/Map                  /part 2
 ```
 
+### Day 15: Beacon Exclusion Zone
+
+```q
+`Sx`Sy`Bx`By set' flip {get @[x;where not x in "-0123456789";:;" "]}each day 15;
+m: sum abs (Sx-Bx;Sy-By) / manhattan dists
+/ part 1
+count except[;Bx where By=Y] distinct raze {$[y<0;();x-y-til 1+2*y]}'[Sx;m-abs Sy-Y]
+/ part 2
+peri: raze 1 1 -1 -1,''(Sy-Sx+m+1; Sy-Sx-m+1; Sy+Sx+m+1; Sy+Sx-m+1)
+int: distinct raze peri {r:0-1%(%/)x-y; (r; sum x*r,1)}\:/: peri
+sum 4000000 1*floor first int where {all raze(x=floor x;0<=x;x<=LIM;m<sum abs(Sx;Sy)-x)} each int
+```
+
 
 ---
 
