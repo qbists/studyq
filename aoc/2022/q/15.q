@@ -10,8 +10,8 @@ m: sum abs (Sx-Bx;Sy-By) / manhattan dists
 / part 1
 count except[;Bx where By=Y] distinct raze {$[y<0;();x-y-til 1+2*y]}'[Sx;m-abs Sy-Y]
 / part 2
-peri:raze 1 1 -1 -1,''(Sy-Sx+m+1; Sy-Sx-m+1; Sy+Sx+m+1; Sy+Sx-m+1)
-int:distinct raze peri {r:0-1%(%/)x-y; (r; sum x*r,1)}\:/: peri
+peri: raze 1 1 -1 -1,''(Sy-Sx+m+1; Sy-Sx-m+1; Sy+Sx+m+1; Sy+Sx-m+1)
+int: distinct raze peri {r:0-1%(%/)x-y; (r; sum x*r,1)}\:/: peri
 sum 4000000 1*floor first int where {all raze(x=floor x;0<=x;x<=LIM;m<sum abs(Sx;Sy)-x)} each int
 
 \
@@ -37,11 +37,6 @@ lac: {raze -1 -1 {1+y[1]+til x[0]-y[1]+1}':,[;1 2#LIM+1] x}  / lacunae in ranges
 sum each 4000000 1*/:.[,'](lac;-1+)@'
   {x~y 0}[1 2#0,LIM] {(merge flip(0|;LIM&)@'flip intersects x 1;1+x 1)}/(1 2#0,LIM;0)
 
-
-\
-
-
-\
 
 //// #adventofcode
 
@@ -126,3 +121,5 @@ range:{neg[x]+til 1+(-/)(neg\)x}
 // part 2
 // works for test data but real input is too large
 // 20 vs ?[;1b]all{y<md[;x]each til[20]cross til 20}'[sensors;distances]
+
+
