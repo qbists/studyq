@@ -203,6 +203,10 @@ sum 4000000 1*floor first int where {all raze(x=floor x;0<=x;x<=LIM;m<sum abs(Sx
 
 ---
 
+[Péter Györök’s AOC 2022 solutions](https://github.com/gyorokpeter/puzzle_solutions/tree/master/aoc/2022)
+
+---
+
 ## Q leaderboard
 
 https://adventofcode.com/2022/leaderboard/private/view/1526329
