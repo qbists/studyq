@@ -200,6 +200,43 @@ int: distinct raze peri {r:0-1%(%/)x-y; (r; sum x*r,1)}\:/: peri
 sum 4000000 1*floor first int where {all raze(x=floor x;0<=x;x<=LIM;m<sum abs(Sx;Sy)-x)} each int
 ```
 
+### Day 16: Proboscidea Volcanium
+
+```q
+d16:{[part;dur;x]
+    a:(" "vs/:x except\:";,");
+    n:`$a[;1]; flow:n!"J"$5_/:a[;4]; edge:n!`$9_/:a;
+    n:asc n; flow2:flow n; edge2:n?edge n;
+    c:count n;
+    edge3:raze til[c],/:'edge2;
+    dist:(c;c)#4000000000000000000;
+    dist:.[;;:;0]/[dist;{x,'x}til c];
+    dist:.[;;:;1]/[dist;edge3];
+    dist:{[x;i]x&x[;i]+/:\:x[i;]}/[dist;til c];
+    pfi:distinct 0,where 0<flow2;
+    dist2:{x[y;y]}[dist;pfi];
+    pf:flow2 pfi;
+    cpf:count pf;
+    queue:enlist`on`pos`time`tflow!(0=til cpf;0;0;0);
+    maxflows:enlist[cpf#0b]!enlist 0;
+    while[count queue;
+        nq:queue;
+        nq:raze{x,/:([]npos:where not x`on)}each nq;
+        if[count nq;
+            nq:update on:@[;;:;1b]'[on;npos], pos:npos, time:1+time+dist2 ./:(pos,'npos) from nq;
+            nq:delete from nq where time>=dur;
+            nq:update tflow:tflow+(dur-time)*pf npos from nq;
+            maxflows|:exec on!tflow from nq;
+        ];
+        queue:nq;
+    ];
+    if[part=1; :max maxflows];
+    kf:1_/:key maxflows;
+    vf:value maxflows;
+    max max (0=sum each/:kf and/:\:kf)*vf+/:\:vf}
+d16[1;30] inp: day 16  / part 1
+d16[2;26] inp          / part 2
+```
 
 ---
 
