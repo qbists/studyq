@@ -1,59 +1,98 @@
-/https://adventofcode.com/2022/day/15
+/https://adventofcode.com/2022/day/16
 
-inp: read0`:input/15.txt
+inp: read0`:input/16.txt
 
 //// #adventofcode
 
 // Péter Györök
-d15p1:{[line;x]a:"J"$2_/:/:(" "vs/:x except\:",:")[;2 3 8 9];
-    range:sum each abs a[;0 1]-a[;2 3];
-    nr:range-abs line-a[;1];
-    xs:flip a[;0]+/:(neg nr;nr);
-    xs:asc xs where 0<=nr;
-    merged:{$[last[x][1]>=y[0];x[count[x]-1;1]|:y[1];x,:enlist y];x}/[1#xs;1_xs];
-    overlap:sum sum(distinct a[;2]where line=a[;3]) within/:merged;
-    sum[1+merged[;1]-merged[;0]]-overlap};
-d15p2:{[line;x]
-    lim:2*line;
-    a:"J"$2_/:/:(" "vs/:x except\:",:")[;2 3 8 9];
-    range:sum each abs a[;0 1]-a[;2 3];
-    cover:{[a;range;lim;line]
-        if[0=line mod 1000;show line];
-        nr:range-abs line-a[;1];
-        xs:flip a[;0]+/:(neg nr;nr);
-        xs[;0]|:0; xs[;1]&:lim;
-        xs:asc xs where 0<=nr;
-        {$[last[x][1]>=y[0]-1;x[count[x]-1;1]|:y[1];x,:enlist y];x}/[1#xs;1_xs]
-        }[a;range;lim]each til 1+lim;
-    c:where 2=count each cover;
-    cc:1+cover[c;0;1];
-    c+4000000*cc};
+d16:{[part;dur;x]
+    a:(" "vs/:x except\:";,");
+    n:`$a[;1]; flow:n!"J"$5_/:a[;4]; edge:n!`$9_/:a;
+    n:asc n; flow2:flow n; edge2:n?edge n;
+    c:count n;
+    edge3:raze til[c],/:'edge2;
+    dist:(c;c)#4000000000000000000;
+    dist:.[;;:;0]/[dist;{x,'x}til c];
+    dist:.[;;:;1]/[dist;edge3];
+    dist:{[x;i]x&x[;i]+/:\:x[i;]}/[dist;til c];
+    pfi:distinct 0,where 0<flow2;
+    dist2:{x[y;y]}[dist;pfi];
+    pf:flow2 pfi;
+    cpf:count pf;
+    queue:enlist`on`pos`time`tflow!(0=til cpf;0;0;0);
+    maxflows:enlist[cpf#0b]!enlist 0;
+    while[count queue;
+        nq:queue;
+        nq:raze{x,/:([]npos:where not x`on)}each nq;
+        if[count nq;
+            nq:update on:@[;;:;1b]'[on;npos], pos:npos, time:1+time+dist2 ./:(pos,'npos) from nq;
+            nq:delete from nq where time>=dur;
+            nq:update tflow:tflow+(dur-time)*pf npos from nq;
+            maxflows|:exec on!tflow from nq;
+        ];
+        queue:nq;
+    ];
+    if[part=1; :max maxflows];
+    kf:1_/:key maxflows;
+    vf:value maxflows;
+    max max (0=sum each/:kf and/:\:kf)*vf+/:\:vf};
+d16p1:{d16[1;30;x]};
+d16p2:{d16[2;26;x]};
+
+x:enlist"Valve AA has flow rate=0; tunnels lead to valves DD, II, BB";
+x,:enlist"Valve BB has flow rate=13; tunnels lead to valves CC, AA";
+x,:enlist"Valve CC has flow rate=2; tunnels lead to valves DD, BB";
+x,:enlist"Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE";
+x,:enlist"Valve EE has flow rate=3; tunnels lead to valves FF, DD";
+x,:enlist"Valve FF has flow rate=0; tunnels lead to valves EE, GG";
+x,:enlist"Valve GG has flow rate=0; tunnels lead to valves FF, HH";
+x,:enlist"Valve HH has flow rate=22; tunnel leads to valve GG";
+x,:enlist"Valve II has flow rate=0; tunnels lead to valves AA, JJ";
+x,:enlist"Valve JJ has flow rate=21; tunnel leads to valve II";
+
+d16p1[x]    //1651
+d16p2[x]    //1707
+
 
 // András Dőtsch
 //part 1
-i:j:get@'(.Q.n!.Q.n) inp
-i[;0 2]+:1000000
-Y:2000000
-L:10000000#"."
-f1:{
-    s:x 0 1;b:x 2 3;
-    d:sum abs s-b;
-    r:s[0]+(abs[Y-s 1]-d;d-abs[Y-s 1]);
-    if[.[<=]r;L[r[0]+til 1+r[1]-r 0]:"#"];
-    if[Y=b 1;L[b 0]:"B"];
+i:read0`16.txt
+I:1!`fr`rt`to!/:{x:" "vs x;"SJS"$(x 1;(.Q.n!.Q.n)x[4];","vs raze 9_x)} each i
+R:desc exec fr!rt from I where 0<rt
+
+//part 1
+
+start:`minute`pos`opened`score!(1;`AA;0#`;0)
+
+pot:{
+    v:(div[;2]30-x`minute) sublist value x[`opened] _ R;
+    @[x;`pot;:;sum v * (30-x`minute)-2*til count v]
  }
-f1 each i;
-0+sum"#"=L
-//part 2
-L1:L2:L3:L4:([]x:();y:())
-f2:{[x0;y0;x1;y1]
-    d:1+abs[x0-x1]+abs[y0-y1];
-    l:til d;
-    `L1 upsert ([]x:x0+l    ;y:(y0-d)+l);
-    `L2 upsert ([]x:(x0+d)-l;y:y0+l);
-    `L3 upsert ([]x:x0-l    ;y:(y0+d)-l);
-    `L4 upsert ([]x:(x0-d)+l;y:y0-l);
+
+opt:{
+    o:flip 4#key[x]!();
+    if[(x[`pos] in key R);
+        if[not x[`pos] in x`opened;
+            o:o upsert (x[`minute]+1;x`pos;x[`opened],x`pos;x[`score]+(30-x[`minute])*R x`pos);
+        ]
+    ];
+    o:o upsert (x[`minute]+1;;x`opened;x`score) each I[x`pos;`to];
+    o:o upsert (x[`minute]+1;x`pos;x`opened;x`score);
+    pot each o
  }
-.[f2] each j;
-sum 4000000 1 * (raze/) L1 inter L2 inter L3 inter L4
+
+BB:{[S]
+    S:delete from S where (score+pot)<max score;
+    S:select from S where score=(max;score)fby([]minute;pos;opened);
+    ni:exec i from S where minute<30;
+    if[0=count ni;:S];
+    S:(delete from S where i in ni),raze opt each S ni;
+    S:distinct S;
+    if[maxScore[`score]<=ms:max S`score;ms:first S where ms=S`score; if[not maxScore~ms;maxScore::ms;show enlist ms]];
+    S
+ }
+
+maxScore:``score!0 0
+
+{first x`score}BB/[enlist pot start]
 
