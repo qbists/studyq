@@ -35,23 +35,11 @@ d16:{[part;dur;x]
     if[part=1; :max maxflows];
     kf:1_/:key maxflows;
     vf:value maxflows;
-    max max (0=sum each/:kf and/:\:kf)*vf+/:\:vf};
-d16p1:{d16[1;30;x]};
-d16p2:{d16[2;26;x]};
+    max max (0=sum each/:kf and/:\:kf)*vf+/:\:vf}
 
-x:enlist"Valve AA has flow rate=0; tunnels lead to valves DD, II, BB";
-x,:enlist"Valve BB has flow rate=13; tunnels lead to valves CC, AA";
-x,:enlist"Valve CC has flow rate=2; tunnels lead to valves DD, BB";
-x,:enlist"Valve DD has flow rate=20; tunnels lead to valves CC, AA, EE";
-x,:enlist"Valve EE has flow rate=3; tunnels lead to valves FF, DD";
-x,:enlist"Valve FF has flow rate=0; tunnels lead to valves EE, GG";
-x,:enlist"Valve GG has flow rate=0; tunnels lead to valves FF, HH";
-x,:enlist"Valve HH has flow rate=22; tunnel leads to valve GG";
-x,:enlist"Valve II has flow rate=0; tunnels lead to valves AA, JJ";
-x,:enlist"Valve JJ has flow rate=21; tunnel leads to valve II";
+d16[1;30] inp  / part 1
+d16[2;26] inp  / part 2
 
-d16p1[x]    //1651
-d16p2[x]    //1707
 
 
 // András Dőtsch
