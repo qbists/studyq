@@ -238,6 +238,70 @@ d16[1;30] inp: day 16  / part 1
 d16[2;26] inp          / part 2
 ```
 
+### Day 17: Pyroclastic Flow 
+
+```q
+.d17.shape:{raze til[count x],/:'where each x}each not null
+    (enlist"####";(" # ";"###";" # ");("  #";"  #";"###");
+    enlist each"####";("##";"##"));
+.d17.ssz:1+max each .d17.shape;
+
+d17:{[lim;x]
+    dir:-1+2*">"=first x;
+    dc:count dir;
+    field:();
+    i:-1;
+    pcs:0;
+    top:0N;
+    flog:enlist[()]!enlist `int$(); //field log
+    hlog:`int$();   //height log
+    while[1b;
+        i+:1;
+        d:dir[i mod dc];
+        if[null top;
+            m:0; while[$[m=count field;0b;0=sum field m]; m+:1];
+            field:m _field;
+            if[pcs>=lim; :count[field]];
+            hlog,:count field;
+            snap:0b,raze 12 sublist field;
+            flog[snap],:pcs;
+            if[3<=count st:flog[snap];
+                if[1=count pers:distinct 1_deltas st;
+                    per:first pers;
+                    hfst:hlog[st 0];    //height in first partial period
+                    hper:hlog[st 2]-hlog[st 1]; //height per period
+                    fullPers:(lim-st 0)div per; //number of full periods
+                    plst:(lim-st 0)mod per;  //pieces in last partial period
+                    hlst:hlog[plst+st 1]-hlog[st 1]; //height in last partial period
+                    :hfst+(fullPers*hper)+hlst;
+                ];
+            ];
+            shape:.d17.shape pcs mod 5;
+            ssz:.d17.ssz pcs mod 5;
+            field:((ssz[0]+3)#enlist 7#0b),field;
+            top:0;
+            left:2;
+            pcs+:1;
+        ];
+        left+:d;
+        if[7<left+ssz 1; left-:1];
+        if[0>left; left+:1];
+        if[any field ./:(top;left)+/:shape; left-:d];
+        top+:1;
+        hit:0b;
+        if[count[field]<top+ssz 0; hit:1b];
+        if[any field ./:(top;left)+/:shape; hit:1b];
+        if[hit;
+            top-:1;
+            field:.[;;:;1b]/[field;(top;left)+/:shape];
+            top:0N;
+        ];
+    ];
+    };
+d17[2022] inp: day 17
+d17[1000000000000] inp
+```
+
 ---
 
 [Péter Györök’s AOC 2022 solutions](https://github.com/gyorokpeter/puzzle_solutions/tree/master/aoc/2022)
