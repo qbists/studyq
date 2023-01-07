@@ -1,5 +1,9 @@
 /https://adventofcode.com/2022/day/17
 
+inp: read0`:test/17.txt
+
+
+// Stephen Taylor
 ROCKS: (
   0,'til 4; 
   (0 1;1 0;1 1;1 2;2 1); 
@@ -7,9 +11,9 @@ ROCKS: (
   til[4],'0; 
   0 1 cross 0 1 )
 
-JETS: -1 1 "<>"?first read0`:input/17.txt
+JETS: -1 1 "<>"?first inp
 
-is:`stack`posn`nr`nj`dr!(4 7#0b;0 2;0;0;0)                     /initial state
+is: `stack`posn`nr`nj`dr!(4 7#0b;0 2;0;0;0)                    /initial state
 
 step: {[s]                                                     /state
   xy: rc s: puff s;                                            /  jet puff
@@ -17,39 +21,45 @@ step: {[s]                                                     /state
     new @[s;`stack;:;] ./[;xy;1b|] s`stack;                    /  fuse in place; next rock
     @[s;`posn;1 0+] ] }                                        /  fall
 
-overlap: {[xy;stack]
-  any xy in 
-    0W 7 vs/: where raze(2+first[max xy])#stack,1 7#1b }
+overlap: {[xy;stack] any(stack,1 7#1b)./:xy}
 
 top: sum not any flip::                                        /# empty rows
 
 new: {[s]                                                      /state
   s[`nr]+:1;                                                   /  next rock
-  rh: 1+ max ROCKS . (mod[s`nr;5];::;0);                       /  rock height 
-  nnr: 0|rh+3-t:top s`stack;                                   /  # new rows
+  rh: 1+ max ROCKS[s[`nr]mod 5;;0];                            /  rock height 
+  nnr: 0|rh+3-top s`stack;                                     /  # new rows
   s: @[s;`stack;] $[nnr;,[(nnr,7)#0b;];::];                    /  lengthen stack?
   s: @[s;`posn;:;] (top[s`stack]-rh+3),2;                      /  posn rock
-  dr: count[s`stack]-max flip[s`stack]?'1b;                    /  # dropped rows
-  @[;`stack;neg[dr]_] @[;`dr;dr+] s }
+  dr: count[s`stack]-max flip[s`stack]?'1b;                    /  # rows to drop
+  @/[s;`stack`dr;] (neg[dr]_;dr+) }
 
 puff: {[s]                                                     /state
-  j: JETS s[`nj]mod count JETS;                                /  next jet
-  xy: rc[s]+\:0,j;                                             /  proposed new coords
-  s[`posn]+: 0,j*$[all xy[;1]within 0 6;
-    not overlap[xy]s`stack; 0b];                               /  move sideways?
+  j: 0,JETS s[`nj]mod count JETS;                              /  next jet
+  c: rc[s]+\:j;                                                /  new coords
+  s[`posn]+: j*(all c[;1]within 0 6)and not overlap[c]s`stack; /  move sideways?
   @[s;`nj;1+] }                                                /  # jets
 
 rc: {[s] s[`posn]+/:ROCKS s[`nr]mod 5}                         /  rock coords
 
-disp: {[s]
-  xy: s[`posn]+/:ROCKS s[`nr]mod 5;                            /  rock coords
+viz: {[s]                                                      /visualise state
   ,[;1 9#"+-+"where 1 7 1] 1 rotate'"||",/:
-    ./[;xy;:;"@"] ".#"@s`stack }
+    ./[;rc s;:;"@"] ".#"@s`stack }
 
 s: {x[`nr]<2022}step/is
 s[`dr]+.[-](count;top)@\:s`stack                               /Part 1
 
-/
+animate: {[s]                                                 /state
+  1 "\033[H\033[J";                                           /  clear console
+  p: first[system"c"]-count v: viz s;                         /  # pad rows
+  vp: $[p; (p,9)#"|.......|"; ()];                            /  vertical padding
+  -1 vp,v;
+  system "sleep 0.5";                                         /  pause
+  s }
+/100 (animate step::)/is;
+
+
+
 ////#adventofcode
 // Péter Györök
 .d17.shape:{raze til[count x],/:'where each x}each not null
@@ -109,12 +119,13 @@ d17:{[lim;x]
         ];
     ];
     };
-d17p1:{d17[2022;x]};
-d17p2:{d17[1000000000000;x]};
+d17[2022] inp
+d17[1000000000000] inp
 
-// An
+\
+// András Dőtsch
 //
-i:first read0`17.txt
+i:first inp
 
 {x}S:flip@'(
     (0 0;0 1;0 2;0 3);
@@ -152,6 +163,7 @@ f:{[j]
         R :: til[max fr] _ R;
     ]
  }
+
 
 //part 1
 C:([]y:0;x:til 7);R:(1#0)!1#7;mi:0
