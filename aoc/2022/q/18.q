@@ -4,20 +4,21 @@ inp: read0`:input/18.txt
 
 //// k4 Topicbox
 // András Dőtsch
-I:get@'inp
+I: get@'inp
 //part 1
-D:(1 0 0;-1 0 0;0 1 0;0 -1 0;0 0 1;0 0 -1)
-s:{[I] sum count@'I except/:D+/:\:I}
+D: (0-1_4#)\[1 0 0] / D: (1 0 0;-1 0 0;0 1 0;0 -1 0;0 0 1;0 0 -1)
+s: {[I] sum count@'I except/:D+/:\:I}
 s I
 //part 2
 I+:1
-U:cross/[til@'2+max I]
-f:{[C] distinct C,U inter raze[D+/:\:C] except I}
+U: cross/[til@'2+max I]
+f: {[C] distinct C,U inter raze[D+/:\:C] except I}
 s U except f/[1 3#0]
 
-/The shortest alternative I've found to generate D:
-D:(0-1_4#)\[1 0 0]
 
+
+
+\
 //// #adventofcode
 // Péter Györök
 .d18.dirs:(1 0 0;-1 0 0;0 1 0;0 -1 0;0 0 1;0 0 -1);
@@ -45,24 +46,28 @@ d18p2:{a:"J"$","vs/:x;
 
 //// Vector Dojo
 // George Berkeley
-s:value each inp
-dirs:(1 0 0;-1 0 0;0 1 0;0 -1 0;0 0 1;0 0 -1)
-sum raze {not in[;s] x +/:dirs} each s / part 1
-minps:-1+min s
-maxps:1+max s
-inbox:{all (x;y;z){[d;i](d>=minps[i]-1)&d<=maxps[i]+1}'(0 1 2)}.
-v:enlist -1+minps
-q0:enlist (-1+min s),3#0
-surface:()
-run:{[q]
+cubes: value each inp
+dirs: (1 0 0;-1 0 0;0 1 0;0 -1 0;0 0 1;0 0 -1)
+show sum raze {not in[;cubes] x +/:dirs} each cubes  /part 1
+
+cubesmin: -1+min cubes
+cubesmax: 1+max cubes
+inbox: {all (x;y;z){[d;i](d>=cubesmin[i]-1)&d<=cubesmax[i]+1}'(0 1 2)}.
+visited: enlist -1+cubesmin
+q0: enlist cubesmin
+surfacecnt: 0
+
+run: {[q]
   p:first q;
-  $[in[;s] 3#p;
-    {surface,:x; 1_ y}[p;q];
-    in[3#p;v];
+  $[in[;cubes] p;
+    {surfacecnt+:1; 1_ y}[p;q];
+    in[p;visited];
     1_ q;
-    {v,:enlist x; (1_ y),ps where {inbox 3#x} each ps:{(x+/:dirs),'dirs} x}[3#p;q]]};
-(0<count@)run/ q0
-count distinct 6 cut surface / part 2
+    {visited,:enlist x; (1_ y),cbs where {inbox x} each cbs:{x+/:dirs} x}[p;q]] }
+
+(0<count@)run/ q0;
+show surfacecnt                                      /part 2
+
 
 //// https://github.com/CillianReilly/AOC
 cubes:value each read0`18t.txt

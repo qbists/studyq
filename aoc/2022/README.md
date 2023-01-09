@@ -301,6 +301,20 @@ d17:{[lim;x]
 d17[2022] inp: day 17
 d17[1000000000000] inp
 ```
+### Day 18: Boiling Boulders
+
+```q
+I: get@' day 18
+//part 1
+D: (0-1_4#)\[1 0 0]
+s: {[I] sum count@'I except/:D+/:\:I}
+s I
+//part 2
+I+:1
+U: cross/[til@'2+max I]
+f: {[C] distinct C,U inter raze[D+/:\:C] except I}
+s U except f/[1 3#0]
+```
 
 ---
 
